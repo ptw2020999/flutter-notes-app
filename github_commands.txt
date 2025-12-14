@@ -1,0 +1,18 @@
+# GitHub 连接命令
+# 在创建GitHub仓库后，请执行以下命令：
+
+# 1. 添加远程仓库（替换YOUR_USERNAME为你的GitHub用户名）
+git remote add origin https://github.com/YOUR_USERNAME/flutter-notes-app.git
+
+# 2. 推送到GitHub
+git branch -M main
+git push -u origin main
+
+# 3. 查看状态
+git status
+
+# 示例（如果你的用户名是ptw2020999）：
+# git remote add origin https://github.com/ptw2020999/flutter-notes-app.git
+# git branch -M main  
+# git push -u origin main
+
