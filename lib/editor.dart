@@ -40,10 +40,24 @@ class _NoteEditorPageState extends State<NoteEditorPage> {
 
     if (widget.note != null) {
       _titleController.text = widget.note!.title;
-      _selectedCategory = widget.note!.category;
+      _selectedCategory = _getValidInitialCategory(widget.note!.category);
       _imagePath = widget.note!.imagePath;
       _contentController.text = widget.note!.content;
+    } else {
+      _selectedCategory = '未分类';
     }
+  }
+
+  // 获取有效的初始分类值，确保在预定义列表中
+  String _getValidInitialCategory([String? category]) {
+    const validCategories = [
+      '未分类', '工作', '学习', '生活', '创意', '旅行', '健康', '财务', '项目', '使用指南'
+    ];
+
+    if (category != null && validCategories.contains(category)) {
+      return category;
+    }
+    return '未分类';
   }
 
   Future<void> _pickImage(ImageSource source) async {
@@ -207,22 +221,60 @@ class _NoteEditorPageState extends State<NoteEditorPage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: DropdownButtonFormField<String>(
-                initialValue: _selectedCategory,
+                initialValue: _getValidInitialCategory(),
                 decoration: const InputDecoration(
                   labelText: '分类',
                   border: OutlineInputBorder(),
                   contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 ),
-                items: CategoryManager.defaultCategories.map((category) {
-                  return DropdownMenuItem(
-                    value: category,
-                    child: Text(category),
-                  );
-                }).toList(),
+                items: [
+                  const DropdownMenuItem(
+                    value: '未分类',
+                    child: Text('未分类'),
+                  ),
+                  const DropdownMenuItem(
+                    value: '工作',
+                    child: Text('工作'),
+                  ),
+                  const DropdownMenuItem(
+                    value: '学习',
+                    child: Text('学习'),
+                  ),
+                  const DropdownMenuItem(
+                    value: '生活',
+                    child: Text('生活'),
+                  ),
+                  const DropdownMenuItem(
+                    value: '创意',
+                    child: Text('创意'),
+                  ),
+                  const DropdownMenuItem(
+                    value: '旅行',
+                    child: Text('旅行'),
+                  ),
+                  const DropdownMenuItem(
+                    value: '健康',
+                    child: Text('健康'),
+                  ),
+                  const DropdownMenuItem(
+                    value: '财务',
+                    child: Text('财务'),
+                  ),
+                  const DropdownMenuItem(
+                    value: '项目',
+                    child: Text('项目'),
+                  ),
+                  const DropdownMenuItem(
+                    value: '使用指南',
+                    child: Text('使用指南'),
+                  ),
+                ],
                 onChanged: (value) {
-                  setState(() {
-                    _selectedCategory = value!;
-                  });
+                  if (value != null) {
+                    setState(() {
+                      _selectedCategory = value;
+                    });
+                  }
                 },
               ),
             ),
