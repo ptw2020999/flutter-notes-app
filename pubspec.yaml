@@ -37,10 +37,11 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   http: ^1.6.0
-  flutter_quill: ^11.5.0
+  # 图片选择
   image_picker: ^1.2.1
-  provider: ^6.1.5+1
+  # 文件路径处理
   path_provider: ^2.1.5
+  uuid: ^4.4.0
 
 dev_dependencies:
   flutter_test:
